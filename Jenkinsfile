@@ -20,13 +20,12 @@ pipeline {
             }
         }
 
-        stage('Test') {
+        stage('Install Dependencies') {
             steps {
-                // Run unit tests
                 script {
                     sh """
-                        echo "Hello, this is Test"
-                    """ 
+                        npm install
+                    """
                 }
             }
         }
