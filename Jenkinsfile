@@ -30,12 +30,11 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Docker Build') {
             steps {
-                // Deploy the application (for example, to a staging environment)
                 script {
                     sh """
-                        echo "Hello, this is Deploy"
+                        docker build -t backend:v1.0.0 .
                     """ 
                 }
             }
