@@ -1,8 +1,8 @@
 pipeline {
     agent { label 'nodejs-agent1'}  // Define the agent (can be any available node)
     environment{
-        PROJECT = 'Expense'
-        COMPONENT = 'Backend'
+        PROJECT = 'expense'
+        COMPONENT = 'backend'
         appVersion = ''
         ACC_ID = '975050030597'
     }
@@ -38,6 +38,9 @@ pipeline {
                     sh """
                         aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ACC_ID}.dkr.ecr.us-east-1.amazonaws.com
 
+                        docker build -t ${ACC_ID}.dkr.ecr.us-east-1.amazonaws.com/${PROJECT}/${COMPONENT}:${appVersion}
+
+                        docker push ${ACC_ID}.dkr.ecr.us-east-1.amazonaws.com/${PROJECT}/${COMPONENT}:${appVersion}
                     """ 
                     }
                 }
